@@ -1,0 +1,40 @@
+server:
+  port: 9090
+
+spring:
+  datasource:
+    username: starnet
+    password: STARnet002396
+    url: jdbc:mysql://127.0.0.1:3306/ipc_monitor?useUnicode=true&charaterEncoding=utf8mb4&useSSL=false&serverTimezone=Asia/Shanghai&autoReconnect=true&allowMultiQueries=true&cachePrepStmts=true&prepStmtCacheSqlLimit=2048&prepStmtCacheSize=256&useServerPrepStmts=true
+
+
+ffmpeg:
+  windows-ffmpeg-path: E:\\WorkSpace\\dev\\ffmpeg\\bin\\ffmpeg.exe
+  windows-ffprobe-path: E:\\WorkSpace\\dev\\ffmpeg\\bin\\ffprobe.exe
+  acodec: copy
+  vcodec: copy
+# quiet,panic, fatal, error, warning, info, verbose, debug, trace
+#  log-level: info
+  output-format: flv
+  push-stream-num: 32
+  try-pull-stream-num: 1
+  push-addr-prefix: rtmp://192.168.12.73:1935/hls/
+
+cloud:
+  get-push-stream-token-url: http://192.168.11.235:9099/monitor/getPushStreamToken
+  get-login-token-url: http://192.168.11.235:9099/user/login
+  username: starnet
+  password: STARnet002396
+
+activemq:
+  username: test
+  password: 123456
+  broker-url: tcp://192.168.11.235:61616
+  message-live-time: 60
+  heartbeat-time: 10
+  max-heartbeat-time: 60
+  command-queue-name: CommandQueue
+
+mybatis:
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  config-location: classpath:mybatis/mybatis-config.xml

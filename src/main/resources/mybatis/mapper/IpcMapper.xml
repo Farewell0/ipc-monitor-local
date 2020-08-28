@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.starnet.ipcmonitorlocal.database.mapper.IpcMapper">
+    <resultMap id="Entity" type="com.starnet.ipcmonitorlocal.database.model.IpcEntity">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="company" property="company" jdbcType="VARCHAR"/>
+        <result column="account" property="account" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="rtsp_addr" property="rtspAddr" jdbcType="VARCHAR"/>
+        <result column="description" property="description" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="TableName">
+        tb_ipc
+    </sql>
+
+    <sql id="ColumnName">
+        id, `name`, company, account, password, rtsp_addr, description
+    </sql>
+
+    <insert id="insert" parameterType="com.starnet.ipcmonitorlocal.database.model.IpcEntity"
+            useGeneratedKeys="true" keyProperty="id">
+        insert into <include refid="TableName"/>
+        (`name`, company, account, password, rtsp_addr, description)
+        values
+        (#{name}, #{company}, #{account}, #{password}, #{rtspAddr}, #{description})
+    </insert>
+
+    <update id="update" parameterType="com.starnet.ipcmonitorlocal.database.model.IpcEntity">
+        update  <include refid="TableName"/>
+        set
+        `name` = #{name}, company = #{company}, account = #{account}, password = #{password},
+        rtsp_addr = #{rtspAddr}, description = #{description}
+        where id = #{id}
+    </update>
+
+    <select id="selectAll" resultMap="Entity">
+        select <include refid="ColumnName"/> from <include refid="TableName"/>
+    </select>
+
+    <select id="selectById" resultMap="Entity">
+        select <include refid="ColumnName"/> from <include refid="TableName"/>
+        where id = #{id}
+    </select>
+
+
+</mapper>
